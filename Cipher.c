@@ -7,30 +7,65 @@ int main() {
 int a = 0, b = 1, c = 2, d = 3, e = 4, f = 5, g = 6, h = 7, i = 8, j = 9, k = 10, l = 11, m = 12, n = 13, o = 14, p = 15, q = 16, r = 17;
 int s = 18, t = 19,  u = 20, v = 21, w = 22, x = 23, y = 24, z = 25;
 int encryptionKey;
+int programControl;
 char letter;
 
-//Encryption key is created
-    printf("Please enter the encryption key: ");
-    scanf("%d", &encryptionKey);
+printf("What action would you like to perform?\n");
+printf("Encode (0), Decryption with Key (1), Decryption without key (2).\n");
+scanf("%d", &programControl);
 
-    printf("Please enter a letter to be encrypted: ");
-    scanf("%s", &letter);
-    printf("%d", (int)letter);
+switch(programControl) {
+    case 1: {
 
-    //This converts lowercase to uppercase
- if(letter >= 97){
-    letter -= 32;
+
+
+
+  //Encryption key is created
+      printf("Please enter the encryption key: \n");
+      scanf("%d", &encryptionKey);
+  
+        char string[1024];
+        int count = 0;
+ 
+       
+ 
+        printf(" Enter the text to be encoded: \n" , n);
+        scanf("%s", string);
+ 
+        while (count < 1024)
+        {
+            printf(" %c = %d\n", string[count], string[count] );
+             if(string[count] >= 97)
+               string[count] -=32;
+               
+             string[count] -=65;
+             string[count] += encryptionKey;    
+             string[count] += 65
+             printf("%c", &c);
+            
+            ++ count ;
+        }
+ 
     }
-    //This will convert ascii numbers from previous bit into a 0-25 number, equivalent to the ints created at the start of the code (a-z)
-    letter -= 65;
-    //Encrypts letters
-    letter += encryptionKey;
-    letter += 65;
-    printf("%c", letter);
-    
-return 0;
+      
+ 
+      //This converts lowercase to uppercase
+   if(letter >= 97){
+      letter -= 32;
+      }
+      //This will convert ascii numbers from previous bit into a 0-25 number, equivalent to the ints created at the start of the code (a-z)
+      letter -= 65;
+      //Encrypts letters
+      letter += encryptionKey;
+      letter += 65;
+      printf("%c", letter);
+      
+      
+      
+  return 0;
+ }
+
 }
-/*
 //Rotation Cipher Encryption Function
 int encryptionRotation(int encryptionKey, char letter) {
     
@@ -45,4 +80,7 @@ int encryptionRotation(int encryptionKey, char letter) {
 //This will convert ascii numbers from previous bit into a 0-25 number, equivalent to the ints created at the start of the code (a-z)
     letter -= 65;
 }
-*/ 
+
+
+ )
+    
