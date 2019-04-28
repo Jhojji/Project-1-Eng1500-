@@ -13,12 +13,12 @@ int main ()
   int programControl = 0, length = 0;
   char text[1024];
 
-  while (programControl <= 0)
+  while (programControl <= 0) //Was orriginally going to set up a more user friendly, looping interface, but that wasnt required for the project
     {
       printf ("What action would you like to perform?\n");
-      printf
-	("Encode with Rotation (1), Rotation decryption with Key (2),Rotation decryption without key (3), Substitution encryption (4), Substitution decryption with key (5), Substituiton decryption without key (6), Exit (7).\n");
+      printf ("Encode with Rotation (1), Rotation decryption with Key (2),Rotation decryption without key (3), Substitution encryption (4), Substitution decryption with key (5), Substituiton decryption without key (6), Exit (7).\n");
       scanf ("%d", &programControl);
+	  //The above is a simple variable to control the state of the program through the followign switch statement
     }
 
  
@@ -28,15 +28,15 @@ int main ()
       {
           
             printf("Please enter the text to be encoded: \n");
-            //useless scanf to discard blank newline
+            //useless scanf used next to discard blank newline- code will skip input without this
             scanf("%*d");
-            scanf("%[^\n]%*c", text);
+            scanf("%[^\n]%*c", text); //[^\n] records all text up to the newline (Enter) letter is found. *c discards the newline character
             
             //Encryption key is created
             printf ("Please enter the encryption key: \n");
         	scanf ("%d", &encryptionKey);
         	printf ("You're key is %d\n", encryptionKey);
-           // Decoding Loop, discarding blank space of initial array 
+           // Decoding Loop, discarding blank space of initial array using length. Not really required, was going to do over things but they were uneeded
               for (i = 0; text[i] != '\0'; i++)
              {
              
@@ -131,8 +131,8 @@ char encryptionRotation (int encryptionKey, int length, char text[])
 	                         
 	  }
      text[length] -= 65;
-     
-     	//alphabet overflow                      
+     //The above bit essentially just reduces the numbers to 1-26 ascii value, just to make my printf test statements (not present in this version) more coherent
+     	//alphabet overflow, used to make sure z (#26) plus the key doesnt go into random symbols                     
 	if((text[length] + encryptionKey) >= 26)
 	   text[length] -=26;
 
@@ -141,6 +141,7 @@ char encryptionRotation (int encryptionKey, int length, char text[])
     }
       printf ("%c", text[length]);
 }
+//Rotation Cipher decryption w/key function
 
 char decryptionRotation (int encryptionKey, int length, char text[])
 {
@@ -151,7 +152,7 @@ char decryptionRotation (int encryptionKey, int length, char text[])
 	                         
 	  }
      text[length] -= 65;
-   
+        //The decryption is pretty much just the reverse of the previous function
      	//alphabet overflow                      
 	if((text[length] - encryptionKey) < 0)
 	   text[length] +=26;
@@ -169,6 +170,7 @@ char Substitution (int length, char text[])
   int s = 18, t = 19, u = 20, v = 21, w = 22, x = 23, y = 24, z = 25;
   
     //Assuming for sub we dont need to make something that randomises each time
+	
       //Changes between capitals and lowercase to ensure correct results
     if ( text[length] >= 65 && text[length] <= 122) {
 	if (text[length] >= 97 && text[length] <= 122){
@@ -176,7 +178,7 @@ char Substitution (int length, char text[])
 	}
 	
 	text[length] -= 65;
-    
+    //Heres a lookup table for the substitution cipher. Each letter is assigned another one. Yay.
     if(text[length] == a)
     text[length] = z;
     
